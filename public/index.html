@@ -117,6 +117,17 @@ main section{padding:clamp(4.5rem,10vw,8rem) var(--gutter)}
 .tablewrap{overflow-x:auto}
 .ledger tr.sel th,.ledger tr.sel td{background:#FBF1CF}
 
+/* issues */
+.issues{list-style:none;margin:2.5rem 0 0;padding:0}
+.issue{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);gap:clamp(1.25rem,3vw,3rem);padding:2rem 0;border-top:1px solid var(--rule);align-items:start}
+.issue:last-child{border-bottom:1px solid var(--rule)}
+.issue h3{font-size:clamp(1.9rem,3.6vw,2.7rem);line-height:.95}
+.issue .fact p{margin:0 0 .6rem}
+.issue .src{font-size:.82rem;color:var(--ink-2)}
+.issue .stand{border-left:4px solid var(--mark);padding-left:1rem}
+.issue .stand strong{display:block;font-size:.85rem;font-weight:600;color:var(--ink-2);margin-bottom:.25rem}
+@media (max-width:900px){.issue{grid-template-columns:1fr;gap:.9rem}}
+
 /* plan */
 .pillars{list-style:none;margin:0;padding:0}
 .pillar{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(1.5rem,4vw,4rem);padding:2.4rem 0;border-top:1px solid var(--rule)}
@@ -181,6 +192,7 @@ footer a{color:#D7DEE3}
 <header class="bar">
   <a class="wordmark" href="#top">Stephen Jordan<span>Frisco ISD Board of Trustees</span></a>
   <nav aria-label="Sections">
+    <a href="#issues">Issues</a>
     <a href="#plan">The plan</a>
     <a href="#grievance">Grievance reform</a>
     <a href="#about">About</a>
@@ -210,6 +222,44 @@ footer a{color:#D7DEE3}
 </div>
 
 <main id="main">
+
+<section id="issues">
+  <div class="wrap">
+    <h2 style="max-width:14ch">What's at stake this year.</h2>
+    <ol class="issues">
+      <li class="issue">
+        <h3>A new bond is coming in May 2027.</h3>
+        <div class="fact"><p>The District has started planning a bond for the May 2027 ballot. The money from the $691 million 2018 bond runs out in 2027, and voters turned down a $1.08 billion bond in 2024. A committee of about 100 residents meets through January.</p><p class="src">Sources: <a href="https://communityimpact.com/frisco/education/frisco-isd-begins-planning-for-potential-2027-bond/">Community Impact</a>, <a href="https://www.friscoisd.org/article/3013353">Frisco ISD</a></p></div>
+        <div class="stand"><strong>Where I stand</strong>I oppose new bond debt. I'll publish a line-by-line review of what the District says it needs and what it can pay for without borrowing.</div>
+      </li>
+      <li class="issue">
+        <h3>Your tax rate stayed flat. Your bill didn't.</h3>
+        <div class="fact"><p>The rate stayed at $1.0194 per $100 of value for 2026. The average home's value rose from $551,246 to $565,084, so the average Frisco ISD tax bill went up $141.</p><p class="src">Source: <a href="https://schools.friscoisd.org/article/3114189">Frisco ISD</a></p></div>
+        <div class="stand"><strong>Where I stand</strong>No rate increase, and when values climb, I'll push to lower the rate so your bill doesn't rise on its own.</div>
+      </li>
+      <li class="issue">
+        <h3>Fewer students, and a school already closed.</h3>
+        <div class="fact"><p>Enrollment has been falling since its 2022–23 peak, because more students graduate than enroll. The District closed Staley Middle School to save money in the 2026–27 budget.</p><p class="src">Source: <a href="https://schools.friscoisd.org/article/3000822">Frisco ISD</a></p></div>
+        <div class="stand"><strong>Where I stand</strong>Families should see the staffing and enrollment numbers, campus by campus, before decisions like that are made, not after.</div>
+      </li>
+      <li class="issue">
+        <h3>Teachers got 2%.</h3>
+        <div class="fact"><p>The 2026–27 budget gave every employee a 2% raise, capped at $2,000 for central administrators, and balanced the budget partly by standardizing class loads.</p><p class="src">Source: <a href="https://schools.friscoisd.org/article/3000822">Frisco ISD</a></p></div>
+        <div class="stand"><strong>Where I stand</strong>Move money from non-instructional roles to classroom teachers, and show the math every year.</div>
+      </li>
+      <li class="issue">
+        <h3>Security spending has doubled.</h3>
+        <div class="fact"><p>Budgeted security and monitoring rose from $5.5 million in 2022–23 to $11.2 million in 2026–27. Families deserve to know what that buys.</p><p class="src">Source: District budget workbooks, <a href="#budget">table below</a></p></div>
+        <div class="stand"><strong>Where I stand</strong>A sworn school resource officer on every campus, and secure entries paid for from audited savings.</div>
+      </li>
+      <li class="issue">
+        <h3>Some complaints never reach the Board.</h3>
+        <div class="fact"><p>Families can be told their complaint stops below the Board, so the trustees they elect never hear it.</p></div>
+        <div class="stand"><strong>Where I stand</strong>Every complaint can reach the Board, in open session if the parent asks. <a href="#grievance">Here's the process.</a></div>
+      </li>
+    </ol>
+  </div>
+</section>
 
 <section id="budget">
   <div class="wrap split">
