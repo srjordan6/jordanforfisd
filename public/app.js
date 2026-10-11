@@ -261,17 +261,20 @@ async function buildScene() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     renderer.setSize(w, h, false);
     cam.aspect = w / h;
-    const wide = w > 820;
+    const wide = w > 960;
     // fit the whole board in frame for this aspect ratio
     const hfov = 2 * Math.atan(Math.tan((cam.fov * Math.PI) / 360) * cam.aspect);
-    const need = (boardW * (wide ? 0.82 : 0.5)) / Math.tan(hfov / 2);
-    const dist = Math.max(wide ? 34 : 24, need);
+    // on wide screens the headline takes the left side, so fit the board into the space to its right
+    const copyW = wide ? Math.min(document.querySelector('.hero-copy').getBoundingClientRect().right + 24, w * 0.55) : 0;
+    const frac = wide ? (w - copyW) / w : 1;
+    const need = (boardW * (wide ? 0.44 : 0.5)) / (Math.tan(hfov / 2) * frac);
+    const dist = Math.max(wide ? 30 : 24, need);
     const dir = cam.position.clone().sub(controls.target).normalize();
     cam.position.copy(controls.target).addScaledVector(dir, dist);
     controls.minDistance = dist * 0.7; controls.maxDistance = dist * 1.3;
     sc.fog.near = dist * 1.3; sc.fog.far = dist * 3.2;
     // on wide screens, shift the model right so the headline has room
-    if (wide) cam.setViewOffset(w, h, -w * 0.13, -h * 0.06, w, h); else cam.clearViewOffset();
+    if (wide) cam.setViewOffset(w, h, -copyW / 2, -h * 0.06, w, h); else cam.clearViewOffset();
     cam.updateProjectionMatrix();
   }
   new ResizeObserver(resize).observe(canvas);
