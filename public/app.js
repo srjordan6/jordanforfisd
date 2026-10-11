@@ -350,3 +350,17 @@ async function buildScene() {
     },
   };
 }
+
+/* ---------- mobile menu ---------- */
+(() => {
+  const btn = document.querySelector('.menu-btn');
+  const nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  const closeBtn = nav.querySelector('.nav-close');
+  const open = () => { nav.classList.add('open'); document.body.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); };
+  const shut = () => { nav.classList.remove('open'); document.body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); };
+  btn.addEventListener('click', open);
+  if (closeBtn) closeBtn.addEventListener('click', shut);
+  nav.addEventListener('click', (e) => { if (e.target.tagName === 'A') shut(); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();

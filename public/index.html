@@ -60,7 +60,21 @@ p{margin:0 0 1em;max-width:var(--measure)}
 .btn.solid:hover{background:#2c3e4e}
 .btn:hover{text-decoration:none}
 .bar .btn{padding:.6rem .95rem;font-size:.92rem}
-@media (max-width:820px){.bar nav{display:none}}
+.menu-btn,.nav-head,.nav-join{display:none}
+.bar .menu-btn{font:700 .92rem/1 var(--body);padding:.6rem .95rem;border:2px solid var(--ink);border-radius:3px;background:var(--paper);color:var(--ink);cursor:pointer}
+.hero .src{font-size:.82rem;color:var(--ink-2);margin-top:.7rem;max-width:34rem}
+@media (max-width:820px){
+  .bar nav{display:none}
+  .bar .bar-join{display:none}
+  .menu-btn{display:inline-flex;align-items:center}
+  nav#site-nav.open{display:flex;position:fixed;inset:0;z-index:50;flex-direction:column;gap:0;background:var(--ink);padding:max(1rem,env(safe-area-inset-top)) var(--gutter) 2rem;overflow-y:auto}
+  nav#site-nav.open a{color:var(--paper);font:700 1.4rem/1 var(--display);padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.14);text-decoration:none}
+  nav#site-nav .nav-head{display:flex;justify-content:space-between;align-items:center;padding:.2rem 0 .6rem;border-bottom:1px solid rgba(255,255,255,.2);margin-bottom:.4rem}
+  nav#site-nav .nav-head span{font:800 .8rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--mark)}
+  nav#site-nav .nav-close{background:transparent;border:1px solid rgba(255,255,255,.4);color:var(--paper);width:2.6rem;height:2.6rem;border-radius:3px;font-size:1.6rem;line-height:1;cursor:pointer}
+  nav#site-nav .nav-join{display:block;color:var(--ink)!important;background:var(--mark);border-radius:3px;margin-top:1rem;padding:.9rem 1rem!important;text-align:center;border-bottom:0!important}
+  body.menu-open{overflow:hidden}
+}
 
 /* hero */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#E7EBEE;padding:calc(6rem + env(safe-area-inset-top)) 0 calc(5.5rem + env(safe-area-inset-bottom))}
@@ -191,14 +205,19 @@ footer a{color:#D7DEE3}
 
 <header class="bar">
   <a class="wordmark" href="#top">Stephen Jordan<span>Frisco ISD Board of Trustees</span></a>
-  <nav aria-label="Sections">
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <nav id="site-nav" aria-label="Sections">
+    <div class="nav-head"><span>Sections</span><button class="nav-close" type="button" aria-label="Close menu">&times;</button></div>
     <a href="#issues">Issues</a>
     <a href="#plan">The plan</a>
+    <a href="#budget">Budget</a>
     <a href="#grievance">Grievance reform</a>
+    <a href="#days">First 100 days</a>
     <a href="#about">About</a>
     <a href="#answers">Straight answers</a>
+    <a class="nav-join" href="#join">Join the campaign</a>
   </nav>
-  <a class="btn solid" href="#join">Join the campaign</a>
+  <a class="btn solid bar-join" href="#join">Join the campaign</a>
 </header>
 
 <div class="hero" id="top">
@@ -210,8 +229,10 @@ footer a{color:#D7DEE3}
     <div class="actions">
       <a class="btn solid" href="#plan">Read the plan</a>
       <a class="btn" href="#budget">See the numbers</a>
+      <a class="btn" href="#days">First 100 days</a>
     </div>
     <p class="hint" id="hint">Drag to turn the model. Select a block to read it.</p>
+    <p class="src">Adopted budget, not actual spending. Dollars, from Frisco ISD budget workbooks, 2022–23 to 2026–27.</p>
   </div>
   <div class="readout" id="readout" aria-live="polite">
     <span class="nm" id="ro-name">General Fund, 2026–27</span>
@@ -270,7 +291,7 @@ footer a{color:#D7DEE3}
     </div>
   </div>
   <div class="wrap" style="margin-top:2.5rem">
-    <div class="tablewrap"><table class="ledger" id="ledger"><caption>Frisco ISD General Fund, budgeted dollars</caption></table></div>
+    <div class="tablewrap"><table class="ledger" id="ledger"><caption>Frisco ISD General Fund, adopted budget by function, in dollars. Not actual spending.</caption></table></div>
     <p class="small muted" style="margin-top:1rem"><a href="/budget.json" download>Download the data</a> as used in the model.</p>
   </div>
 </section>
@@ -409,6 +430,14 @@ footer a{color:#D7DEE3}
         <p>No. It takes four votes to pass anything. Each part of the plan says whether it needs a Board vote, a Board policy, or the Superintendent acting at the Board's direction, so you can judge what's realistic.</p>
       </details>
       <details>
+        <summary>How would you pay for your proposals?</summary>
+        <p>Most of the plan is about how existing money is spent, not new spending. Zero based budgeting, vendor review, and annual program review are meant to free up money the District already has. Where something costs more, like a resource officer on every campus, I'll name the cost and fund it from audited savings first, not new debt or a higher tax rate. I won't promise a number I can't source.</p>
+      </details>
+      <details>
+        <summary>What if the savings aren't there?</summary>
+        <p>Then the Board makes the call in the open, with the numbers in front of it, instead of assuming. A commitment to find savings is not a guarantee that every project gets funded. I would rather tell you that plainly than promise everything and hand you a surprise later.</p>
+      </details>
+      <details>
         <summary>Where do the budget numbers come from?</summary>
         <p>From the District's own budget workbooks for 2022–23 through 2026–27, General Fund appropriations by function. The figures in the model add up to the totals the District published for each year.</p>
       </details>
@@ -420,7 +449,7 @@ footer a{color:#D7DEE3}
   <div class="wrap split">
     <h2>Join the campaign.</h2>
     <div>
-      <p>Get updates, and tell me how you'd like to help. I'll never sell or share your information.</p>
+      <p>Get updates, and tell me how you'd like to help. Expect a short note every few weeks, nothing more. I'll never sell or share your information.</p>
       <form id="signup" novalidate>
         <label>Name<input type="text" name="name" autocomplete="name" required></label>
         <label>Email<input type="email" name="email" autocomplete="email" required></label>
