@@ -105,19 +105,21 @@ $('#signup').addEventListener('submit', async (e) => {
   const email = String(fd.get('email') || '').trim();
   if (!name) { st.textContent = 'Enter your name.'; f.name.focus(); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { st.textContent = 'Enter a valid email address.'; f.email.focus(); return; }
+  const turnstile = String(fd.get('cf-turnstile-response') || '');
+  if (!turnstile) { st.textContent = 'Please finish the quick human check above the button.'; return; }
   const btn = f.querySelector('button[type=submit]');
   btn.disabled = true; st.textContent = 'Sending…';
   try {
     const r = await fetch('/api/signup', {
       method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ name, email, zip: fd.get('zip'), help: fd.getAll('help'), company: fd.get('company') }),
+      body: JSON.stringify({ name, email, zip: fd.get('zip'), help: fd.getAll('help'), company: fd.get('company'), turnstile }),
     });
     if (!r.ok) throw new Error();
     f.reset();
     st.textContent = `Thanks, ${name.split(' ')[0]}. You're on the list.`;
   } catch {
-    st.textContent = 'That didn\u2019t go through. Try again, or email srjordan@gmail.com.';
-  } finally { btn.disabled = false; }
+    st.textContent = 'That didn\u2019t go through. Try again, or email stephen@jordanforfisd.com.';
+  } finally { btn.disabled = false; try { window.turnstile && window.turnstile.reset(); } catch {} }
 });
 
 /* ---------- 3D model ---------- */

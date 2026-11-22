@@ -10,6 +10,17 @@ export default {
       let b;
       try { b = await request.json(); } catch { return json({ error: 'Send JSON.' }, 400); }
       if (b.company) return json({ ok: true }); // honeypot: quietly drop bots
+      // Cloudflare Turnstile: confirm a person submitted the form
+      const token = String(b.turnstile || '');
+      if (!token) return json({ error: 'Please complete the human check.' }, 403);
+      const form = new FormData();
+      form.append('secret', env.TURNSTILE_SECRET);
+      form.append('response', token);
+      const ip = request.headers.get('CF-Connecting-IP');
+      if (ip) form.append('remoteip', ip);
+      const v = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form })
+        .then((r) => r.json()).catch(() => ({ success: false }));
+      if (!v.success || (v.hostname && v.hostname !== 'jordanforfisd.com')) return json({ error: 'Human check failed. Please try again.' }, 403);
       const name = String(b.name || '').trim().slice(0, 120);
       const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
       if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return json({ error: 'Name and a valid email are required.' }, 400);
